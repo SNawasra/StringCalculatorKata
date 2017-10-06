@@ -35,5 +35,17 @@ namespace StringKataCalculator.Tests
         {
             Assert.AreEqual(result, _stringKataCalculator.Add(numbers));
         }
+
+        [Test]
+        public void Add_ShouldReturnsTheSumOfNumbers_WhenStringNumbersContainsNewLineDelimiter()
+        {
+            Assert.AreEqual(6, _stringKataCalculator.Add("1\n2,3"));
+        }
+
+        [Test]
+        public void Add_ShouldReturnZero_WhenStringNumbersEqualsNewLineDelimiter()
+        {
+            Assert.AreEqual(0, _stringKataCalculator.Add("\n"));
+        }
     }
 }

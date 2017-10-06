@@ -11,20 +11,19 @@ namespace StringKataCalculator
         public int Add(string numbers)
         {
             if (string.IsNullOrEmpty(numbers)) return 0;
-            List<int> parsedNumbers = ParseStringNumbers(numbers);
-            int sum = parsedNumbers.Sum();
-            return sum;
+            return ParseStringNumbers(numbers).Sum();
         }
 
         private List<int> ParseStringNumbers(string numbers)
         {
             List<int> validIntegers = new List<int>();
-            string[] numberList = numbers.Split(',');
+            var delimiters  = new List<String>() { ",", "\n" }.ToArray();
+            string[] numbersList = numbers.Split(delimiters, StringSplitOptions.None);
 
-            for (int i = 0; i < numberList.Length; i++)
+            for (int i = 0; i < numbersList.Length; i++)
             {
                 int value = 0;
-                if (int.TryParse(numberList[i], out value)) validIntegers.Add(value);
+                if (int.TryParse(numbersList[i], out value)) validIntegers.Add(value);
             }
 
             return validIntegers;
