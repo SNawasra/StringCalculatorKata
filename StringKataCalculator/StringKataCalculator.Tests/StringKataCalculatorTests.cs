@@ -70,5 +70,12 @@ namespace StringKataCalculator.Tests
             var ex = Assert.Throws<Exception>(() => _stringKataCalculator.Add(numbers));
             Assert.That(ex.Message, Is.EqualTo(result));
         }
+
+        [TestCase("3,1001", 3)]
+        [TestCase("1,1010,1020,2,3", 6)]
+        public void Add_ShouldReturnsTheSumOfNumbersLessThanMax_WhenStringNumbersContainsNumbersGreaterThan1000(string numbers, int result)
+        {
+            Assert.AreEqual(result, _stringKataCalculator.Add(numbers));
+        }
     }
 }

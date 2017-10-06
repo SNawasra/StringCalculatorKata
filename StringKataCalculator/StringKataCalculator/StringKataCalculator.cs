@@ -13,7 +13,7 @@ namespace StringKataCalculator
             if (string.IsNullOrEmpty(numbers)) return 0;
             List<int> parsedNumbers = ParseStringNumbers(numbers);
             CheckNegativeNumbers(parsedNumbers);
-            return ParseStringNumbers(numbers).Sum();
+            return ParseStringNumbers(numbers).Where(n => n > 0 && n < 1000).Sum();
         }
 
         private List<int> ParseStringNumbers(string numbers)
