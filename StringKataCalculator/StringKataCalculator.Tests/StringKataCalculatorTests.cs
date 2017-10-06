@@ -47,5 +47,13 @@ namespace StringKataCalculator.Tests
         {
             Assert.AreEqual(0, _stringKataCalculator.Add("\n"));
         }
+
+        [TestCase("//;\n1", 1)]
+        [TestCase("//;\n1;2", 3)]
+        [TestCase("//;\n1;2;3", 6)]
+        public void Add_ShouldReturnTheSumOfNumbers_WhenStringNumbersContainsNewDelimiter(string numbers, int result)
+        {
+            Assert.AreEqual(result, _stringKataCalculator.Add(numbers));
+        }
     }
 }
