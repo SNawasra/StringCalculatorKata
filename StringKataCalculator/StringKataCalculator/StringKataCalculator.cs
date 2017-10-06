@@ -55,7 +55,7 @@ namespace StringKataCalculator
                 }
             }
 
-            return delimiters;
+            return delimiters.OrderByDescending(xc => xc.Length).ToList();
         }
 
         private void CheckNegativeNumbers(List<int> parsedNumbers)
