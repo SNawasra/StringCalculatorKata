@@ -55,5 +55,20 @@ namespace StringKataCalculator.Tests
         {
             Assert.AreEqual(result, _stringKataCalculator.Add(numbers));
         }
+
+        [Test]
+        public void Add_ShouldThrowsException_WhenStringNumberContainsSingleNegativeNumber()
+        {
+            var ex = Assert.Throws<Exception>(() => _stringKataCalculator.Add("-1"));
+            Assert.That(ex.Message, Is.EqualTo("negatives not allowed -1"));
+        }
+
+        [TestCase("-1,2,-3", "negatives not allowed -1,-3")]
+        [TestCase("-5,-6,-7,9", "negatives not allowed -5,-6,-7")]
+        public void Add_ShouldThrowsException_WhenTheStringNumbersContainsMultipleNegativeNumbers(string numbers,string result)
+        {
+            var ex = Assert.Throws<Exception>(() => _stringKataCalculator.Add(numbers));
+            Assert.That(ex.Message, Is.EqualTo(result));
+        }
     }
 }

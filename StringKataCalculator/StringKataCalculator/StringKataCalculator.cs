@@ -11,6 +11,8 @@ namespace StringKataCalculator
         public int Add(string numbers)
         {
             if (string.IsNullOrEmpty(numbers)) return 0;
+            List<int> parsedNumbers = ParseStringNumbers(numbers);
+            CheckNegativeNumbers(parsedNumbers);
             return ParseStringNumbers(numbers).Sum();
         }
 
@@ -28,6 +30,7 @@ namespace StringKataCalculator
             {
                 delimiters.Add(",");
             }
+
 
             string[] numbersList = numbers.Split(delimiters.ToArray(), StringSplitOptions.None);
             for (int i = 0; i < numbersList.Length; i++)
@@ -50,6 +53,15 @@ namespace StringKataCalculator
             }
 
             return delimiters;
+        }
+
+        private void CheckNegativeNumbers(List<int> parsedNumbers)
+        {
+            List<int> negativeNumbers = parsedNumbers.Where(n => n < 0).Select(n => n).ToList();
+            if (negativeNumbers.Any())
+            {
+                throw new Exception(string.Format("negatives not allowed {0}", string.Join(",", negativeNumbers)));
+            }
         }
     }
 }
