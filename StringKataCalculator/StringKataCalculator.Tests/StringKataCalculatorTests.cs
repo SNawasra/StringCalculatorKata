@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using StringKataCalculator.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace StringKataCalculator.Tests
 {
     public class StringKataCalculatorTests
     {
-        private StringKataCalculator _stringKataCalculator;
+        private IStringKataCalculator _stringKataCalculator;        
         public StringKataCalculatorTests()
         {
-            _stringKataCalculator = new StringKataCalculator();
+            IDelimiters delimiters = new Delimiters();
+            IStringNumbersParser stringNumbersParser = new StringNumbersParser(delimiters);
+            _stringKataCalculator = new StringKataCalculator(stringNumbersParser);
         }
 
         [Test]
