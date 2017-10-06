@@ -27,10 +27,13 @@ namespace StringKataCalculator.Tests
             Assert.AreEqual(1, _stringKataCalculator.Add("1"));
         }
 
-        [Test]
-        public void Add_ShouldReturnTheSumOfNumbers_WhenNumberStringContainsTwoNumbers()
+        [TestCase("1,2", 3)]
+        [TestCase("1,2,3", 6)]
+        [TestCase("1,2,3,4,5,6", 21)]
+        [TestCase("1,2,3,4,5,6,9", 30)]
+        public void Add_ShouldReturnTheSumOfNumbers_WhenNumberStringContainsMultipleNumbers(string numbers, int result)
         {
-            Assert.AreEqual(3, _stringKataCalculator.Add("1,2,3"));
+            Assert.AreEqual(result, _stringKataCalculator.Add(numbers));
         }
     }
 }
