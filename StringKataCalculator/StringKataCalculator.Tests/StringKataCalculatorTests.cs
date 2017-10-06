@@ -77,5 +77,25 @@ namespace StringKataCalculator.Tests
         {
             Assert.AreEqual(result, _stringKataCalculator.Add(numbers));
         }
+
+        [TestCase("//[***]\n1***2***3", 6)]
+        [TestCase("//[**%*]\n1**%*2**%*3", 6)]
+        public void Add_ShouldReturnTheSumofNumbers_WhenStringNumbersContainsNumbersContainsMultiCharCustomDelimiter(string numbers, int result)
+        {
+            Assert.AreEqual(result, _stringKataCalculator.Add(numbers));
+        }
+
+        [Test]
+        public void Add_ShouldReturnTheSumofNumbers_WhenStringNumbersContainsMultipleDelimiters()
+        {
+            Assert.AreEqual(6, _stringKataCalculator.Add("//[*][%]\n1*2%3"));
+        }
+
+        [TestCase("//[**][%%]\n1**2%%3", 6)]
+        [TestCase("//[**][%**%]\n1**2%**%3", 6)]
+        public void Add_ShouldReturnTheSumofNumbers_henStringNumbersContainsMultipleDelimitersWithMultipleChar(string numbers, int result)
+        {
+            Assert.AreEqual(result, _stringKataCalculator.Add(numbers));
+        }
     }
 }

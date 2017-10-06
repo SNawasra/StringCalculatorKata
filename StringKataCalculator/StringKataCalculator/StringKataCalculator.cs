@@ -19,18 +19,7 @@ namespace StringKataCalculator
         private List<int> ParseStringNumbers(string numbers)
         {
             List<int> validIntegers = new List<int>();
-            var delimiters  = new List<String>() {"\n" };
-            var newDelimiters = Parse(numbers);
-
-            if(newDelimiters != null && newDelimiters.Count > 0)
-            {
-                delimiters.AddRange(newDelimiters);
-            }
-            else
-            {
-                delimiters.Add(",");
-            }
-
+            var delimiters = GetDelimiters(numbers);
 
             string[] numbersList = numbers.Split(delimiters.ToArray(), StringSplitOptions.None);
             for (int i = 0; i < numbersList.Length; i++)
@@ -42,14 +31,28 @@ namespace StringKataCalculator
             return validIntegers;
         }
 
-        public List<string> Parse(string stringNumbers)
+
+        public List<string> GetDelimiters(string stringNumbers)
         {
-            List<string> delimiters = new List<string>();
+            List<string> delimiters = new List<string>() { ",", "\n" }; ;
 
             if (stringNumbers.StartsWith("//"))
             {
-                string delimiter = stringNumbers[2].ToString();
-                delimiters.Add(delimiter);
+                string startofDelimiter = stringNumbers[2].ToString();
+                if (startofDelimiter.StartsWith("["))
+                {
+                    string delimiterSection = stringNumbers.Substring(2, stringNumbers.IndexOf("\n") - 2);
+                    string[] splits = delimiterSection.Split(']');
+
+                    for (int i = 0; i < splits.Length - 1; i++)
+                    {
+                        delimiters.Add(splits[i].Remove(0, 1));
+                    }
+                }
+                else
+                {
+                    delimiters.Add(startofDelimiter);
+                }
             }
 
             return delimiters;
